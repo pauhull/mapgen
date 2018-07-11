@@ -1,0 +1,7 @@
+name: MapGenerator
+author: pauhull
+version: 1.0
+main: de.pauhull.mapgen.Main
+
+commands:
+  getmap:

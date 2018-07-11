@@ -1,0 +1,10 @@
+# Map Generator Config
+
+ColorSpace: AUTO
+# This setting sets the used color space, which depends on the version you're playing with. If this setting isn't set
+# properly, generated maps may display incorrectly.
+# AUTO    -  Plugin detects version. Use this if you aren't sure what to choose
+# MC1_12   - Choose this if only players playing version 1.12 or higher can join
+# MC1_8_1  - Choose this if only players playing version 1.8.1 or higher can join
+# MC1_7_2  - Choose this if only players playing version 1.7.2 or higher can join
+# ORIGINAL - Choose this if only players playing version 1.7.1 or lower can join
