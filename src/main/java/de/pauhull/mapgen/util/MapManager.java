@@ -88,8 +88,8 @@ public class MapManager {
                 data.setShort("width", (short) 128);
                 data.setByte("trackingPosition", (byte) 0);
                 data.setByte("unlimitedTracking", (byte) 0);
-                data.setInt("xCenter", 0);
-                data.setInt("zCenter", 0);
+                data.setInt("xCenter", Integer.MAX_VALUE);
+                data.setInt("zCenter", Integer.MAX_VALUE);
                 data.setByteArray("colors", getMapSection(x, y, map));
 
                 CompoundTag mapTag = new CompoundTag("map");
