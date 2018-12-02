@@ -20,6 +20,9 @@ public class CommandGetMap implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("getmap")) {
+            if(!(sender instanceof Player) || !sender.hasPermission("getmap")) {
+                return true;
+            }
             if (args.length == 3) {
                 Player player = (Player) sender;
                 BufferedImage image = null;
@@ -32,7 +35,7 @@ public class CommandGetMap implements CommandExecutor {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                ItemStack[][] stacks = MapManager.getMapItem(new JavaMap(image, Integer.parseInt(args[1]), Integer.parseInt(args[2])), player.getWorld().getName());
+                ItemStack[][] stacks = MapManager.getMapItem(new JavaMap(image, Integer.parseInt(args[1]), Integer.parseInt(args[2])), /* player.getWorld().getName()*/ "world");
                 for (int i = 0; i < stacks.length; i++) {
                     for (int j = 0; j < stacks[0].length; j++) {
                         player.getInventory().addItem(stacks[i][j]);

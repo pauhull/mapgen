@@ -33,6 +33,64 @@ public class JavaMap {
                             nearest = color;
                         }
                     }
+
+                    if (x < width - 1 && x > 0 && y < height - 1 && y > 0) {
+                        int errR = pixel.getRed() - nearest.getRed();
+                        int errG = pixel.getGreen() - nearest.getGreen();
+                        int errB = pixel.getBlue() - nearest.getBlue();
+
+                        // move error 7/16 to x+1, y+0
+                        Color nextColor = new Color(image.getRGB(x + 1, y));
+                        float r = nextColor.getRed();
+                        float g = nextColor.getGreen();
+                        float b = nextColor.getBlue();
+                        r = r + errR * 7 / 16.0f;
+                        g = g + errG * 7 / 16.0f;
+                        b = b + errB * 7 / 16.0f;
+                        r = clamp(r, 0, 255);
+                        g = clamp(g, 0, 255);
+                        b = clamp(b, 0, 255);
+                        image.setRGB(x + 1, y, new Color((int) r, (int) g, (int) b).getRGB());
+
+                        // move error 3/16 to x-1, y+1
+                        nextColor = new Color(image.getRGB(x - 1, y + 1));
+                        r = nextColor.getRed();
+                        g = nextColor.getGreen();
+                        b = nextColor.getBlue();
+                        r = r + errR * 3 / 16.0f;
+                        g = g + errG * 3 / 16.0f;
+                        b = b + errB * 3 / 16.0f;
+                        r = clamp(r, 0, 255);
+                        g = clamp(g, 0, 255);
+                        b = clamp(b, 0, 255);
+                        image.setRGB(x - 1, y + 1, new Color((int) r, (int) g, (int) b).getRGB());
+
+                        // move error 5/16 to x+0, y+1
+                        nextColor = new Color(image.getRGB(x, y + 1));
+                        r = nextColor.getRed();
+                        g = nextColor.getGreen();
+                        b = nextColor.getBlue();
+                        r = r + errR * 5 / 16.0f;
+                        g = g + errG * 5 / 16.0f;
+                        b = b + errB * 5 / 16.0f;
+                        r = clamp(r, 0, 255);
+                        g = clamp(g, 0, 255);
+                        b = clamp(b, 0, 255);
+                        image.setRGB(x, y + 1, new Color((int) r, (int) g, (int) b).getRGB());
+
+                        // move error 1/16 to x+1, y+1
+                        nextColor = new Color(image.getRGB(x + 1, y + 1));
+                        r = nextColor.getRed();
+                        g = nextColor.getGreen();
+                        b = nextColor.getBlue();
+                        r = r + errR * 1 / 16.0f;
+                        g = g + errG * 1 / 16.0f;
+                        b = b + errB * 1 / 16.0f;
+                        r = clamp(r, 0, 255);
+                        g = clamp(g, 0, 255);
+                        b = clamp(b, 0, 255);
+                        image.setRGB(x + 1, y + 1, new Color((int) r, (int) g, (int) b).getRGB());
+                    }
                 }
 
                 //System.out.println(nearest.getRed() + " " + nearest.getGreen() + " " + nearest.getBlue() + " " + nearest.getAlpha());
@@ -45,6 +103,10 @@ public class JavaMap {
 
             }
         }
+    }
+
+    public static float clamp(float x, float min, float max) {
+        return Math.min(Math.max(x, min), max);
     }
 
     public static BufferedImage resizeImage(BufferedImage image, int newWidth, int newHeight) {
